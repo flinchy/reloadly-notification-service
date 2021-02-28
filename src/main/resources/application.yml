@@ -53,6 +53,8 @@ app:
   username: chiiwowo3@gmail.com
   password: chisom.1
 
+notification-server-health: https://reloadly-notification-service.herokuapp.com/actuator/health
+
 ---
 spring:
   datasource:
