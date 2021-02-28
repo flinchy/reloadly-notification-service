@@ -1,0 +1,73 @@
+
+server.port: 8083
+server.error.include-message: always
+
+# Strongly recommend to set this property to "none" in a production environment!
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  application:
+    name: notification-service
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: chiiwowo3@gmail.com
+    password: chisom.1
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+spring.datasource:
+  url: jdbc:postgresql://ec2-54-242-43-231.compute-1.amazonaws.com:5432/dfsi2nusdj97oq
+  username: acdxcnmcjutkoy
+  password: 6a24f000345972d021046c083d67aa68c341006152d8a0fe5e767c724bba6f9f
+
+spring.datasource.hikari.initializationFailTimeout: 60000
+
+logging:
+  level:
+    root: INFO
+    com.chisom: DEBUG
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_URL:https://reloadly-eureka-server.herokuapp.com/eureka}
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    registryFetchIntervalSeconds: 5
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 5
+
+app:
+  host: smtp.gmail.com
+  post: 587
+  username: chiiwowo3@gmail.com
+  password: chisom.1
+
+---
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres/notification_db
+  config:
+    activate:
+      on-profile: docker
+
+server.port: 8083
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+
+app:
+  auth-service:
+    validateUrl: http://auth-service:8082/oauth/check_token?token=
+    basicAuth: Basic dGVzdDp0ZW1w
