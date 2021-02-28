@@ -8,3 +8,5 @@ spring:
       ddl-auto: update
   profiles:
     active: test
+
+notification-server-health: https://reloa.com
